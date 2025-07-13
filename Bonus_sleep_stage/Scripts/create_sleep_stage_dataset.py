@@ -97,7 +97,6 @@ def load_sleep_profile_file(file_path):
             time_str = parts[0].strip()
             stage_str = parts[1].strip()
             
-            # Parse timestamp in format: 30.05.2024 20:59:00,000
             timestamp = datetime.strptime(time_str, "%d.%m.%Y %H:%M:%S,%f")
             
             sleep_stages.append((timestamp, stage_str))
@@ -129,7 +128,7 @@ def assign_window_label(window_start, window_end, df_sleep_profile):
     if len(df_sleep_profile) == 0:
         return "Unknown"
     
-    # Sort sleep profile by timestamp
+    # Sorting sleep profile by timestamp
     df_sleep_profile = df_sleep_profile.sort_values('start_time').reset_index(drop=True)
     
     # Find sleep stages that overlap with the window
@@ -208,7 +207,7 @@ def create_dataset(in_dir, out_dir):
             print("Applying bandpass filter (0.17-0.4 Hz) to Flow and Thoracic signals")
             df_flow['flow'] = filter_signal(df_flow['flow'], fs=32)
             df_thor['thoracic'] = filter_signal(df_thor['thoracic'], fs=32)
-            # SpO2 is not filtered as per assignment
+            # SpO2 is not filtered 
             
             # Combine signals (same as breathing irregularity framework)
             df_all = df_flow.join(df_thor, how='outer').join(df_spo2, how='outer')
@@ -231,10 +230,10 @@ def create_dataset(in_dir, out_dir):
                 window_data = df_all.loc[current_time:window_end]
                 
                 if len(window_data) > 0:
-                    # Assign label based on sleep stage overlap (MODIFIED)
+                    # Assigning label based on sleep stage overlap 
                     label = assign_window_label(current_time, window_end, df_sleep_profile)
                     
-                    # Create window record (same structure as breathing irregularity)
+                    # Create window record 
                     window_record = {
                         'participant_id': participant_id,
                         'window_id': window_id,
@@ -256,14 +255,13 @@ def create_dataset(in_dir, out_dir):
         except Exception as e:
             print(f"Error processing {participant_id}: {e}")
     
-    # Convert to DataFrame and save (same as breathing irregularity framework)
+    # Converting to DataFrame and saving it.
     if all_windows:
         df_dataset = pd.DataFrame(all_windows)
         
-        # Save as CSV (same format as breathing irregularity)
+        # Saving as CSV 
         output_file = os.path.join(out_dir, "sleep_stage_dataset.csv")
         
-        # For CSV, we need to handle the signal lists differently
         # Convert signal lists to string representation for CSV compatibility
         df_csv = df_dataset.copy()
         for col in ['flow_signal', 'thoracic_signal', 'spo2_signal']:
@@ -274,16 +272,14 @@ def create_dataset(in_dir, out_dir):
         print(f"\nDataset saved to: {output_file}")
         print(f"Total windows: {len(df_dataset)}")
         
-        # Show label distribution (modified for sleep stages)
+        # Show label distribution 
         label_counts = df_dataset['label'].value_counts()
         print(f"\nSleep stage distribution:")
         for label, count in label_counts.items():
             percentage = (count / len(df_dataset)) * 100
             print(f"  {label}: {count} windows ({percentage:.1f}%)")
             
-        print(f"\nDataset format: CSV")
-        print(f"Reason: CSV format chosen for easy inspection, sharing, and compatibility")
-        print(f"with various analysis tools. Signal data stored as comma-separated values.")
+        print(f"\nDataset: sleep_stage_dataset.csv")
     
     else:
         print("No windows were created")
