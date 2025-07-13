@@ -9,25 +9,13 @@ import os
 
 class CNNModel:
     def __init__(self, input_shape, num_classes, dataset_path="Dataset/breathing_dataset.csv"):
-        """
-        Initialize the 1D CNN model for sleep stage classification.
         
-        Args:
-            input_shape: Shape of input data (time_steps, features)
-            num_classes: Number of classes for classification
-            dataset_path: Path to the dataset CSV file
-        """
         self.input_shape = input_shape
         self.num_classes = num_classes
         self.dataset_path = dataset_path
         
     def load_dataset(self):
-        """
-        Load the dataset from the specified path.
         
-        Returns:
-            DataFrame containing the dataset
-        """
         if not os.path.exists(self.dataset_path):
             raise FileNotFoundError(f"Dataset not found at: {self.dataset_path}")
         
@@ -37,12 +25,7 @@ class CNNModel:
         return df
     
     def get_dataset_info(self):
-        """
-        Get information about the dataset.
         
-        Returns:
-            Dictionary with dataset information
-        """
         try:
             df = self.load_dataset()
             info = {
@@ -57,12 +40,7 @@ class CNNModel:
             return None
         
     def create_model(self):
-        """
-        Create and compile the 1D CNN model.
         
-        Returns:
-            Compiled Keras model
-        """
         model = Sequential([
             # First convolutional block
             Conv1D(32, 11, activation='relu', input_shape=self.input_shape),
@@ -103,41 +81,25 @@ class CNNModel:
         return model
     
     def get_model_summary(self):
-        """
-        Get model summary for debugging and visualization.
         
-        Returns:
-            Model summary
-        """
         model = self.create_model()
         return model.summary()
     
     def get_recommended_epochs(self):
-        """
-        Get recommended number of epochs for training.
         
-        Returns:
-            Number of epochs
-        """
         return 20
     
     def get_recommended_batch_size(self):
-        """
-        Get recommended batch size for training.
         
-        Returns:
-            Batch size
-        """
         return 64
 
 
-# Example usage
+
 if __name__ == "__main__":
     # Example for breathing irregularity detection
     input_shape = (961, 3)  # 961 time points, 3 signals
     num_classes = 3  # Normal, Hypopnea, Obstructive Apnea
     
-    # Create CNN model with dataset path
     cnn = CNNModel(input_shape, num_classes, dataset_path="Dataset/breathing_dataset.csv")
     
     # Get dataset information
