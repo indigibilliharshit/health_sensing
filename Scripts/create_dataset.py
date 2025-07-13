@@ -233,8 +233,7 @@ def create_dataset(in_dir, out_dir):
         # Save as CSV
         output_file = os.path.join(out_dir, "breathing_dataset.csv")
         
-        # For CSV, we need to handle the signal lists differently
-        # Convert signal lists to string representation for CSV compatibility
+        # Converting signal lists to string representation for CSV compatibility
         df_csv = df_dataset.copy()
         for col in ['flow_signal', 'thoracic_signal', 'spo2_signal']:
             df_csv[col] = df_csv[col].apply(lambda x: ','.join(map(str, x)))

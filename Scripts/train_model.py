@@ -12,7 +12,7 @@ from sklearn.utils.class_weight import compute_class_weight
 import warnings
 warnings.filterwarnings('ignore')
 
-# Set random seeds for reproducibility
+# Setting random seeds for reproducibility
 tf.random.set_seed(42)
 np.random.seed(42)
 

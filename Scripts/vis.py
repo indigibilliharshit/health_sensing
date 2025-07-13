@@ -9,25 +9,21 @@ from datetime import datetime
 import re
 
 def find_file_with_prefix(folder, prefix):
-    """Enhanced file finder that handles different naming conventions"""
     files_found = []
     
     for fname in os.listdir(folder):
         if fname.lower().endswith('.txt'):
-            # Special case for "Flow Events" - match exactly
+            
             if prefix.lower() == "flow events":
                 if fname.lower().startswith("flow events"):
                     files_found.append(fname)
             else:
-                # For all other files, match by first word only
-                # But exclude "Flow Events" when searching for "Flow"
                 fname_lower = fname.lower()
                 
-                # Skip "Flow Events" files when looking for other types
                 if fname_lower.startswith("flow events"):
                     continue
                 
-                # Extract first word from filename
+                # Extracting first word from filename
                 first_word = fname.split()[0].lower() if fname.split() else ""
                 
                 if first_word == prefix.lower():
@@ -98,7 +94,7 @@ def calculate_smart_ylim(data, default_min=None, default_max=None, padding_facto
     
     # Handle case where all values are identical or very close
     if data_range == 0 or data_range < 1e-10:
-        # Create a small range around the value
+        # Creating a small range around the value
         center = data_min
         if abs(center) > 1:
             # For larger values, use 10% of the value as range
@@ -124,7 +120,7 @@ def calculate_smart_ylim(data, default_min=None, default_max=None, padding_facto
 def generate_smart_ticks(y_min, y_max, target_ticks=4):
     y_range = y_max - y_min
     
-    # Handle edge cases
+    # Handling edge cases
     if y_range == 0 or y_range < 1e-10:
         # If range is zero or very small, create simple ticks around the center
         center = (y_min + y_max) / 2
@@ -132,7 +128,7 @@ def generate_smart_ticks(y_min, y_max, target_ticks=4):
     
     rough_interval = y_range / target_ticks
     
-    # Handle very small intervals
+    # Handling very small intervals
     if rough_interval < 1e-10:
         return [y_min, (y_min + y_max) / 2, y_max]
     
@@ -236,7 +232,7 @@ def plot_window(start, end, df_all, event_df, participant_id):
 
             event_type = row['event_type'].strip().lower()
             
-            # Define colors for different event types
+            # Defining colors for different event types
             if event_type == "hypopnea":
                 event_color = 'yellow'
                 text_color = 'black'
@@ -288,7 +284,6 @@ def main(participant_path):
     participant_id = os.path.basename(participant_path.rstrip('/\\'))
     print(f"Processing: {participant_id}")
 
-    # Load files with the enhanced file finder
     
     try:
         flow_file = find_file_with_prefix(participant_path, "Flow")
