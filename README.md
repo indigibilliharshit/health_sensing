@@ -72,14 +72,15 @@ Health-Sensing-Assignment/
 │   │   └── AP05_After_Cleaning_visual.pdf
 │   └── Scripts_for_Filtered_Visualization/
 │       └── filter_clean.py                  # Signal filtering script
-├── Dataset/
-│   ├── sleep_stage_dataset.csv             # Sleep stage classification dataset
-│   ├── bonus_sleep_stage/                  # Sleep stage model outputs
-│   └── breathing_dataset.csv               # Breathing irregularity dataset
-├── Scripts/
-│   ├── create_sleep_stage_dataset.py       # Sleep stage dataset creation
+├── Bonus_sleep_stage/                       # Sleep stage classification (Bonus Task)
+│   ├── Dataset/
+│   │   └── sleep_stage_dataset.csv         # Sleep stage dataset
+│   └── Scripts/
+│       ├── create_sleep_stage_dataset.py   # Sleep stage dataset creation
+│       └── train_model.py                  # Sleep stage model training
+├── Scripts/                                # Main breathing irregularity scripts
 │   ├── create_dataset.py                   # Breathing dataset creation
-│   ├── train_model.py                      # Model training pipeline
+│   ├── train_model.py                      # Breathing irregularity training
 │   └── vis.py                              # Visualization script
 ├── Data/                                   # Raw participant data
 │   ├── AP01/
@@ -87,6 +88,8 @@ Health-Sensing-Assignment/
 │   ├── AP03/
 │   ├── AP04/
 │   └── AP05/
+├── Dataset/
+│   └── breathing_dataset.csv               # Main breathing irregularity dataset
 ├── Models/
 │   ├── cnn_model.py                        # 1D CNN implementation
 │   └── conv_lstm_model.py                  # Conv-LSTM implementation
@@ -95,7 +98,8 @@ Health-Sensing-Assignment/
 │   ├── AP02_visualization.pdf
 │   ├── AP03_visualization.pdf
 │   ├── AP04_visualization.pdf
-│   └── AP05_visualization.pdf
+│   ├── AP05_visualization.pdf
+│   └── attributes                          # Visualization attributes
 ├── health_sensing_report.pdf               # Comprehensive project report
 ├── requirements.txt                        # Python dependencies
 ├── LICENSE                                 # MIT License
@@ -105,12 +109,12 @@ Health-Sensing-Assignment/
 ## 🚀 Installation
 
 ### Prerequisites
-- Python 3.10
+- Python 3.8 or higher
 - CUDA-compatible GPU (recommended for training)
 
 ### Setup
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/indigibilliharshit/health_sensing.git
-cd health_sesning
+git clone https://github.com/your-username/health-sensing-assignment.git
+cd health-sensing-assignment
