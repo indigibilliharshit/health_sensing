@@ -116,5 +116,5 @@ Health-Sensing-Assignment/
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/your-username/health-sensing-assignment.git
-cd health-sensing-assignment
+git clone https://github.com/indigibilliharshit/health_sensing.git
+cd health_sensing
