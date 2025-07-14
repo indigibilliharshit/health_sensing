@@ -71,7 +71,7 @@ Health-Sensing-Assignment/
 │   │   ├── AP04_After_Cleaning_visual.pdf
 │   │   └── AP05_After_Cleaning_visual.pdf
 │   └── Scripts_for_Filtered_Visualization/
-│       └── filter_clean.py                  # Signal filtering script
+│       └── after_clean_vis.py               # Signal filtering with visualization script
 ├── Bonus_sleep_stage/                       # Sleep stage classification (Bonus Task)
 │   ├── Dataset/
 │   │   └── sleep_stage_dataset.csv         # Sleep stage dataset
@@ -79,7 +79,7 @@ Health-Sensing-Assignment/
 │       ├── create_sleep_stage_dataset.py   # Sleep stage dataset creation
 │       └── train_model.py                  # Sleep stage model training
 ├── Scripts/                                # Main breathing irregularity scripts
-│   ├── create_dataset.py                   # Breathing dataset creation
+│   ├── create_dataset.py                   # Breathing dataset creation + filtering applied in it
 │   ├── train_model.py                      # Breathing irregularity training
 │   └── vis.py                              # Visualization script
 ├── Data/                                   # Raw participant data
@@ -103,7 +103,7 @@ Health-Sensing-Assignment/
 ├── health_sensing_report.pdf               # Comprehensive project report
 ├── requirements.txt                        # Python dependencies
 ├── LICENSE                                 # MIT License
-└── README.md                              # This file
+└── README.md                               # This file
 ```
 
 ## 🚀 Installation
